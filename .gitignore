@@ -18,5 +18,7 @@ images/*
 output/*
 !output/readme-collage.png
 
+.streamlit/secrets.toml
+
 #slop file
 CLAUDE.md

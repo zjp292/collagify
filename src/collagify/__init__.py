@@ -1,3 +1,3 @@
-from collagify.collage import create_collage, find_images
+from collagify.collage import build_collage, create_collage, find_images, load_image
 
-__all__ = ["create_collage", "find_images"]
+__all__ = ["build_collage", "create_collage", "find_images", "load_image"]
