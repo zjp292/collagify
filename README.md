@@ -28,6 +28,8 @@ uv sync
 
 ## Usage
 
+### CLI
+
 ```bash
 uv run main.py --input-dir images --output output/collage.png
 ```
@@ -41,3 +43,13 @@ uv run main.py --input-dir images --output output/collage.png
 | `--background` | `-b` | `white` | Background color (name or hex) |
 
 Images are read in filename order, resized to a common height (preserving aspect ratio, no cropping or flipping), and placed left to right. Landscape and portrait images can be mixed freely. EXIF orientation is respected.
+
+### Dashboard
+
+A Streamlit dashboard is included if you'd rather drag-and-drop images than run a command:
+
+```bash
+uv run streamlit run streamlit_app.py
+```
+
+Upload two or more images, adjust height/spacing/background, and download the resulting collage.
