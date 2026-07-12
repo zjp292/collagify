@@ -3,7 +3,13 @@ from pathlib import Path
 import pytest
 from PIL import Image
 
-from collagify.collage import IMAGE_EXTENSIONS, create_collage, find_images
+from collagify.collage import (
+    IMAGE_EXTENSIONS,
+    build_collage,
+    create_collage,
+    find_images,
+    load_image,
+)
 
 
 def make_image(path: Path, size: tuple[int, int], color: str = "red") -> Path:
@@ -179,3 +185,44 @@ class TestCreateCollage:
 
         with Image.open(output) as collage:
             assert collage.mode == "RGB"
+
+
+class TestLoadImage:
+    def test_loads_from_path(self, tmp_path: Path) -> None:
+        path = make_image(tmp_path / "a.png", (100, 100))
+
+        img = load_image(path)
+
+        assert img.size == (100, 100)
+        assert img.mode == "RGB"
+
+    def test_loads_from_file_like_object(self, tmp_path: Path) -> None:
+        path = make_image(tmp_path / "a.png", (100, 100))
+
+        with path.open("rb") as f:
+            img = load_image(f)
+
+        assert img.size == (100, 100)
+        assert img.mode == "RGB"
+
+    def test_converts_to_rgb(self, tmp_path: Path) -> None:
+        path = tmp_path / "a.png"
+        Image.new("RGBA", (10, 10), color=(255, 0, 0, 128)).save(path)
+
+        img = load_image(path)
+
+        assert img.mode == "RGB"
+
+
+class TestBuildCollage:
+    def test_raises_on_empty_image_list(self) -> None:
+        with pytest.raises(ValueError):
+            build_collage([])
+
+    def test_tiles_pre_loaded_images(self, tmp_path: Path) -> None:
+        img_a = load_image(make_image(tmp_path / "a.png", (100, 100)))
+        img_b = load_image(make_image(tmp_path / "b.png", (100, 100)))
+
+        collage = build_collage([img_a, img_b], target_height=50, spacing=10)
+
+        assert collage.size == (50 + 10 + 50, 50)
