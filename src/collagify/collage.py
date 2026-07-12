@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, ImageOps
 
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".bmp", ".gif", ".tiff"}
 
@@ -37,6 +37,7 @@ def create_collage(
     resized = []
     for path in image_paths:
         with Image.open(path) as img:
+            img = ImageOps.exif_transpose(img)
             img = img.convert("RGB")
             ratio = target_height / img.height
             new_width = max(1, round(img.width * ratio))
