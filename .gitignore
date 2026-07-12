@@ -15,3 +15,6 @@ images/*
 
 output/*
 !output/readme-collage.png
+
+#slop file
+CLAUDE.md
