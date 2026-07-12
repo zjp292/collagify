@@ -14,9 +14,9 @@ Input images in [images/](images/):
 | --- | --- |
 | ![scene_v1](images/scene_v1.png) | ![scene_v2](images/scene_v2.png) |
 
-Running collagify produces [output/collage.png](output/collage.png), which places them side by side so the difference is obvious at a glance:
+Running collagify produces [output/readme-collage.png](output/readme-collage.png), which places them side by side so the difference is obvious at a glance:
 
-![collage](output/collage.png)
+![collage](output/readme-collage.png)
 
 ## Installation
 

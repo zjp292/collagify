@@ -10,4 +10,8 @@ wheels/
 .venv
 
 images/*
+!images/scene_v1.png
+!images/scene_v2.png
+
 output/*
+!output/readme-collage.png
