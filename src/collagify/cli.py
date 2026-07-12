@@ -40,5 +40,5 @@ def main(
     print(f"[green]Collage saved to {result_path}[/green]")
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     app()
